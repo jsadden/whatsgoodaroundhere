@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl'
 import {connect} from 'react-redux'
 
+
 const readyToGo = true
 
 class Map extends Component {
@@ -9,7 +10,7 @@ class Map extends Component {
 
     constructor(props) {
         super(props)
-        mapboxgl.accessToken = 'pk.eyJ1IjoianNhZGRlbiIsImEiOiJja2MwdDg4Z3AwOTZzMnB2dDNlN3FvdzkxIn0.XfVDyduVC6KXxyA9oOq57w';
+        mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
     }
 
     ///////////////////////////////////////

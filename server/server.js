@@ -18,6 +18,7 @@ app.use('/api/restaurants', Restaurant)
 const MenuItem = require('./routes/menuItems')
 app.use('/api/menuItems', MenuItem)
 
+
 //connect to database
 mongoose.connect(config.DATABASE, {
     useNewUrlParser: true,
