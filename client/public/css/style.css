@@ -1,0 +1,503 @@
+body {
+    margin: 0;
+    padding:0;
+    font-family: 'Roboto', sans-serif;
+    color:#585858;
+    background-color: #dfdfdf;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 30px;
+  font-weight: 400;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+button {
+  border: 0px;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+button:hover {
+  transform: scale(1.05);
+  background-color: #ffb9b9;
+}
+
+
+
+a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid #ffffff;
+  border-radius: 0px;
+  border-bottom: 2px solid #ffffff;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=text]:hover,
+input[type=password]:hover,
+input[type=email]:hover {
+  border: 0px solid #ffffff;
+  border-radius: 0px;
+  border-bottom: 2px solid #c00000;
+}
+
+.half-width-input{
+  width: 50%;
+}
+
+.errormessage {
+  color: #c00000;
+  padding-bottom: 25px;
+}
+
+
+
+/*--------------*/
+/*----HEADER----*/
+/*--------------*/
+header {
+    padding-top: 5px;
+    background: #c00000;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    z-index: 999;
+}
+
+header a {
+  color: #dfdfdf;
+}
+
+header a:hover {
+  color: #333333
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-left: 20px;
+    float: left;
+    display: flex;
+}
+.logo-image {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+}
+.logo-text {
+  padding-left: 20px;
+}
+
+
+nav {
+    font-size: 20px;
+    font-weight: 500;
+    padding-right: 10px;
+    padding-top: 5px;
+    align-content: center;
+    align-items: center;
+    float: right;
+}
+
+nav a {
+    padding: 10px 20px 10px 0px;
+    text-decoration: none;
+    float: right;
+}
+
+.main-content {
+    padding-top: 70px
+}
+
+@media screen and (max-width: 600px) {
+  header {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+  }
+
+  .main-content {
+    padding-top: 120px
+  }
+
+  .logo {
+    padding-left: 0px;
+    width: 100%;
+    order: 1
+  }
+  nav {
+    width: 100%;
+    order: 2;
+    justify-content: space-between;
+    padding: 0px;
+  }
+  nav a {
+    display: inline-block;
+    float: none;
+    padding: 10px 10px 10px 10px;
+  }
+
+}
+
+/*--------------*/
+/*----HOME------*/
+/*--------------*/
+.home-banner-overlay {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    background-size: cover;
+    background-position: center center;
+}
+
+.home-banner {
+    height: 500px;
+    width: 100%;
+    background: #00000062;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #dfdfdf;
+}
+
+
+
+/*--------------*/
+/*--SEARCHBAR---*/
+/*--------------*/
+
+.searchbar-container {
+  background-color: #dfdfdf;
+  text-align: center;
+  padding: 20px 0px 20px 0px;
+}
+
+
+/*--------------*/
+/*----FEED------*/
+/*--------------*/
+
+.feed-container {
+  height: 500px;
+  width: 50%;
+  background: #dfdfdf;
+  float: left;
+  overflow-y: auto;
+}
+
+.feed-title {
+  text-align: center;
+}
+
+.feed-result-card {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #c00000;
+  display: flex;
+  align-items: center;
+  box-shadow: 3px 3px 4px 0px #c00000;
+  transition: 0.2s all ease-in-out;
+  
+}
+.feed-result-card:hover {
+  transform: scale(1.05);
+
+}
+
+.feed-result-card-button {
+  margin-left: auto;
+}
+.feed-result-card-button button{
+  background-color: #ffb9b9;
+}
+.feed-result-card-button button:hover{
+  background-color: #ffffff;
+  border: 2px solid #ffb9b9;
+  transform: scale(1.0);
+}
+
+
+.feed-result-card-item {
+  font-size: 20px;
+}
+
+
+/*--------------*/
+/*----MAP-------*/
+/*--------------*/
+
+
+.map-container {
+  height: 500px;
+  width: 50%;
+  background: #dfdfdf;
+  float: right;
+}
+
+@media screen and (max-width: 750px) {
+  .feed-container {
+    width: 100%;
+  }
+
+  .map-container {
+    width: 100%;
+  }
+
+}
+/*--------------*/
+/*---ADDITEMS---*/
+/*--------------*/
+
+.additemssection-container{
+  background: #dfdfdf;
+  text-align: center;
+  padding: 20px;
+}
+.additems-input {
+  width: 50%;
+}
+
+.button-item {
+  display: flex;
+  width: 70%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+
+}
+
+.button-item button:focus {
+  border: 2px solid #ffb9b9;
+  background-color: #dfdfdf;
+}
+
+
+/*--------------*/
+/*----PROFILE---*/
+/*--------------*/
+.profile-container {
+  text-align: center;
+  padding-top: 120px;
+}
+.profile-title {
+  padding-bottom: 40px;
+}
+
+.profile-recommend-feed {
+  width: 80%;
+  height: 80vh;
+  text-align: left;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+.change-password-container {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+/*--------------*/
+/*----LOGIN-----*/
+/*--------------*/
+.login-container {
+  height: 100vh;
+  text-align: center;
+}
+
+.login-options {
+  padding-top: 20vh;
+  width: 60%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+}
+
+.login-form-container {
+  padding-top: 30px;
+}
+
+/*----ADMIN-----*/
+/*----LOGIN-----*/
+/*--------------*/
+.admin-login-title {
+  padding-top: 20vh;
+}
+
+
+/*--------------*/
+/*----LOGOUT----*/
+/*--------------*/
+.logout-container {
+  height: 100vh;
+  text-align: center;
+}
+.logout-message {
+  padding-top: 20vh;
+}
+.logout-login {
+  padding-top: 100px;
+}
+
+/*----ADMIN-----*/
+/*----HOME------*/
+/*--------------*/
+.admin-container {
+  text-align: center;
+}
+.admin-title {
+  padding-top: 10vh;
+}
+
+.admin-restaurant-feed,
+.admin-items-feed {
+  height: 500px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.admin-buttons-container {
+  flex-wrap: wrap;
+  margin-left: auto;
+  text-align: center;
+}
+.admin-button {
+  width: 100%;
+  margin: 0 auto;
+}
+.admin-button button {
+  width: 100%;
+}
+
+/*--------------*/
+/*----FOOTER----*/
+/*--------------*/
+
+footer {
+    width: 100%;
+    height: 70px;
+    background: #c00000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #dfdfdf;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/*--------------*/
+/*-----404------*/
+/*--------------*/
+.not-found-container {
+  height: 100vh;
+  text-align: center;
+}
+
+.not-found-message {
+  padding-top: 20vh;
+}
+
+
+
+/*=============================
+            LOADER
+===============================*/
+.loader-container {
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+}
+.loader {
+    color: #6d6d6d;
+  font-size: 11px;
+  text-indent: -99999em;
+  margin: 200px auto;
+  position: relative;
+  width: 20em;
+  height: 20em;
+  box-shadow: inset 0 0 0 1em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  content: '';
+}
+.loader:before {
+  width: 10.2em;
+  height: 20.2em;
+  background: #ffffff;
+  border-radius: 20.2em 0 0 20.2em;
+  top: -0.1em;
+  left: -0.1em;
+  -webkit-transform-origin: 10.2em 10.1em;
+  transform-origin: 10.2em 10.1em;
+  -webkit-animation: load2 2s infinite ease 1.5s;
+  animation: load2 2s infinite ease 1.5s;
+}
+.loader:after {
+  width: 10.2em;
+  height: 20.2em;
+  background: #ffffff;
+  border-radius: 0 20.2em 20.2em 0;
+  top: -0.1em;
+  left: 10.1em;
+  -webkit-transform-origin: 0px 10.1em;
+  transform-origin: 0px 10.1em;
+  -webkit-animation: load2 2s infinite ease;
+  animation: load2 2s infinite ease;
+}
+
+@-webkit-keyframes load2 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load2 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
