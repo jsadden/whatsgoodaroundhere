@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl'
 import {connect} from 'react-redux'
 
 
-const readyToGo = true
+const readyToGo = false
 
 class Map extends Component {
     map = null;
