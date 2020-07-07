@@ -26,9 +26,10 @@ mongoose.connect(config.DATABASE, {
     useFindAndModify: false
 })
 
+
 app.use(express.static('client/build'))
 
-
+//production path
 if (process.env.NODE_ENV === 'production') {
     const path = require('path');
     app.get('/*', (req,res)=> {
