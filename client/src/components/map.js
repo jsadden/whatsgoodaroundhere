@@ -59,42 +59,45 @@ class Map extends Component {
     renderMarkers() {
 
         //remove old markers
-        if (this.map.getLayer("points")) {
-            this.map.removeLayer("points");
-        }
-
-        if (this.map.getSource("points")) {
-            this.map.removeSource("points");
-        }
-        
-        //bounds init
-        const bounds = new mapboxgl.LngLatBounds()
-
-        //compile array object of features to be passed to marker creator
-        const markerFeatures = this.props.restaurants.restaurant.map((item, i) => {
-            
-            //extend bounds to include location
-            bounds.extend([item.location.coordinates[1], item.location.coordinates[0]])
-
-            return {
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [item.location.coordinates[1], item.location.coordinates[0]]
-                },
-                "properties": {
-                    "restaurantName": item.name,
-                    "icon": "restaurant"
-                }
+        if (this.map) {
+            if (this.map.getLayer("points")) {
+                this.map.removeLayer("points");
             }
-        })
-
+    
+            if (this.map.getSource("points")) {
+                this.map.removeSource("points");
+            }
         
-        //add new markers
-        this.createCustomMarker(markerFeatures)
+        
+            //bounds init
+            const bounds = new mapboxgl.LngLatBounds()
 
-        //zoom map to bounds
-        this.map.fitBounds(bounds, {padding: {top: 75, bottom:75, left: 75, right: 75}})
+            //compile array object of features to be passed to marker creator
+            const markerFeatures = this.props.restaurants.restaurant.map((item, i) => {
+                
+                //extend bounds to include location
+                bounds.extend([item.location.coordinates[1], item.location.coordinates[0]])
+
+                return {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [item.location.coordinates[1], item.location.coordinates[0]]
+                    },
+                    "properties": {
+                        "restaurantName": item.name,
+                        "icon": "restaurant"
+                    }
+                }
+            })
+
+            
+            //add new markers
+            this.createCustomMarker(markerFeatures)
+
+            //zoom map to bounds
+            this.map.fitBounds(bounds, {padding: {top: 75, bottom:75, left: 75, right: 75}})
+        }
     }
 
 

@@ -134,10 +134,21 @@ router.get('/getByUnique', (req,res) => {
     
 
     let findParams = {}
+
+    //regex of possible restaurant names
+    let restaurantRegex = req.query.restaurant.join("|")
+
     if (req.query.typeTags !== '') {
-        findParams = {uniqueIdentifier: { "$regex": req.query.name + '.*' + req.query.restaurant, "$options": "i" }, typeTags: {"$regex": req.query.typeTags, "$options": "i"}}
+        findParams = {
+            name: {"$regex": req.query.name, "$options": "i" },
+            restaurant: {"$regex": restaurantRegex, "$options": "i" },
+            typeTags: {"$regex": req.query.typeTags, "$options": "i"}
+        }
     } else {
-        findParams = {uniqueIdentifier: { "$regex": req.query.name + '.*' + req.query.restaurant, "$options": "i" }}
+        findParams = {
+            name: {"$regex": req.query.name, "$options": "i" },
+            restaurant: {"$regex": restaurantRegex, "$options": "i" }
+        }
     }
 
     MenuItem.find(findParams, 

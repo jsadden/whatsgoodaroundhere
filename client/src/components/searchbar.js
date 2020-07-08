@@ -4,6 +4,7 @@ import {getRestaurants,} from '../store/actions/restaurant_actions'
 import {getMenuItems, clearMenuItems} from '../store/actions/menuItem_actions'
 
 
+
 class SearchBar extends Component {
 
     state = { 
@@ -11,7 +12,8 @@ class SearchBar extends Component {
         searchrestaurant: '',
         searchaddress: '',
         searchItem: '',
-        searchType: ''
+        searchType: '',
+        uniqueRestaurants: []
     }
     
     ///////////////////////////////////////
@@ -24,22 +26,66 @@ class SearchBar extends Component {
     ///////////////////////////////////////
     //search the database based on the values entered in the form
     ///////////////////////////////////////
-    handleQueryChange() {
+    handleRestaurantQueryChange(sentByItemField) {
 
+        //city must be entered
         if (this.state.searchcity !== '') {
+
+            //build a query for the restaurants -- note that name expects an array
             const query = {
-                name: this.state.searchrestaurant.trim(),
+                name: [this.state.searchrestaurant.trim()],
                 city: this.state.searchcity.trim(),
                 address: this.state.searchaddress.trim(),
-                typeTags: this.state.searchType.trim()
+
             }
-            const itemQuery = {
-                name: this.state.searchItem.trim(),
-                restaurant: this.state.searchrestaurant.trim(),
-                typeTags: this.state.searchType.trim()
-            }
-            this.props.dispatch(getRestaurants(query))
-            this.props.dispatch(getMenuItems(itemQuery))
+            
+            //get matching restaurants based on query
+            this.props.dispatch(getRestaurants(query)).then(response => {
+
+                //if there are restaurants found
+                if (this.props.restaurant.success && this.props.restaurant.restaurant) {
+                    
+                    //get the unique restaurant name values
+                    let uniqueRestaurants = [...new Set(this.props.restaurant.restaurant.map(restaurant => restaurant.name))]
+
+                    //build item query using form values and the uniquely returned restaurants
+                    const itemQuery = {
+                        name: this.state.searchItem.trim(),
+                        restaurant: uniqueRestaurants,
+                        typeTags: this.state.searchType.trim()
+                    }
+                    
+                    //get menu items
+                    this.props.dispatch(getMenuItems(itemQuery)).then(response => {
+
+                        //this is for when item or tag changes -- restaurants must be filtered to reflect on the map
+                        //if this is not here -- the map can have restaurants not found in the item list
+                        if (sentByItemField) {
+
+                            //if items were returned
+                            if ( this.props.items.success && this.props.items.item){ 
+
+                                //get unique restaurants based on returned items
+                                let uniqueRestaurants = [...new Set(this.props.items.item.map(item => item.restaurant))]
+                                
+                                //build restaurant query
+                                const query = {
+                                    name: uniqueRestaurants,
+                                    city: this.state.searchcity.trim(),
+                                    address: this.state.searchaddress.trim()
+                                }
+
+                                //get restaurants again, but filtered
+                                this.props.dispatch(getRestaurants(query))
+
+                            }
+                        }
+                    })
+                } else {
+                    this.props.dispatch(clearMenuItems())
+                }
+            })
+            
             
         }
     }
@@ -56,7 +102,7 @@ class SearchBar extends Component {
                         name='city'
                         placeholder='Enter a city (we need this first)'
                         className='half-width-input'
-                        onChange={event => this.setState({searchcity: event.target.value}, () => {this.handleQueryChange()})}
+                        onChange={event => this.setState({searchcity: event.target.value}, () => {this.handleRestaurantQueryChange(false)})}
                     />
                 </div>
                 
@@ -70,7 +116,7 @@ class SearchBar extends Component {
                         name='type'
                         placeholder='Indian, Chinese, etc..'
                         className='half-width-input'
-                        onChange={event => this.setState({searchType: event.target.value}, () => {this.handleQueryChange()})}
+                        onChange={event => this.setState({searchType: event.target.value}, () => {this.handleRestaurantQueryChange(true)})}
                     />
                 </div>
                 
@@ -86,7 +132,7 @@ class SearchBar extends Component {
                         name='item'
                         placeholder='Enter a dish'
                         className='half-width-input'
-                        onChange={event => this.setState({searchItem: event.target.value}, () => {this.handleQueryChange()})}
+                        onChange={event => this.setState({searchItem: event.target.value}, () => {this.handleRestaurantQueryChange(true)})}
                     />
                 </div>
 
@@ -96,7 +142,7 @@ class SearchBar extends Component {
                         name='restaurant'
                         placeholder='Enter a restaurant'
                         className='half-width-input'
-                        onChange={event => this.setState({searchrestaurant: event.target.value}, () => {this.handleQueryChange()})}
+                        onChange={event => this.setState({searchrestaurant: event.target.value}, () => {this.handleRestaurantQueryChange(false)})}
                     />
                 </div>
                 
@@ -107,7 +153,7 @@ class SearchBar extends Component {
                         name='address'
                         placeholder='Enter an address'
                         className='half-width-input'
-                        onChange={event => this.setState({searchaddress: event.target.value}, () => {this.handleQueryChange()})}
+                        onChange={event => this.setState({searchaddress: event.target.value}, () => {this.handleRestaurantQueryChange(false)})}
                     />
                 </div>
                     

@@ -146,10 +146,15 @@ router.get('/getUnique', (req,res) => {
 router.get('/getRestaurants', (req,res) => {
 
     let findParams = {}
-    if (req.query.typeTags !== '') {
-        findParams = {uniqueIdentifier: { "$regex": req.query.name + '.*' + req.query.address + '.*' + req.query.city, "$options": "i" }, typeTags: {"$regex": req.query.typeTags, "$options": "i"}}
-    } else {
-        findParams = {uniqueIdentifier: { "$regex": req.query.name + '.*' + req.query.address + '.*' + req.query.city, "$options": "i" }}
+
+    //regex of possible restaurant names
+    let restaurantRegex = req.query.name.join("|")
+
+    //query parameters
+    findParams = {
+        name: { "$regex": restaurantRegex , "$options": "i"},
+        city: { "$regex": req.query.city , "$options": "i"},
+        address: { "$regex": req.query.address , "$options": "i"}
     }
 
     Restaurant.find(findParams, (err, doc) => {

@@ -96,8 +96,8 @@ export function getRestaurant({name, address, city}) {
     }
 }
 
-export function getRestaurants({name, address, city, typeTags}) {
-    const request = axios.get('/api/restaurants/getRestaurants', {params: {name, address, city, typeTags}}).then(
+export function getRestaurants({name, address, city}) {
+    const request = axios.get('/api/restaurants/getRestaurants', {params: {name, address, city}}).then(
         response => response.data
     )
 
