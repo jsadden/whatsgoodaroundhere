@@ -508,3 +508,8 @@ footer {
       transform: rotate(360deg);
     }
   }
+
+
+  .git-test {
+    width: 100%
+  }
